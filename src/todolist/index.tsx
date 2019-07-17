@@ -37,8 +37,8 @@ const TodoApp: React.FC = () => {
 
 	});
 
-	function activeCount(items: Item[]) {
-        let active = 0;
+	function activeCount(items: Item[]): number {
+        let active: number = 0;
         for (let i = 0; i < items.length; i++) {
             if (items[i].done == false) {
                 active++;
@@ -47,36 +47,37 @@ const TodoApp: React.FC = () => {
         return active;
     }
 
-    function addItem(value: Item['value']) {
+    function addItem(value: Item['value']): void  {
         const todoItems = state.items;
+
         todoItems.unshift({
             index: todoItems.length + 1, 
             value: value, 
             done: false
         });
+
         setState({
             items: todoItems,
             todoCount: activeCount(todoItems)
         });
     }
 
-    function removeItem(itemIndex: number) {
+    function removeItem(itemIndex: number): void  {
         const todoItems = state.items;
         todoItems.splice(itemIndex, 1);
 
-        //update state
         setState({
             items: todoItems,
             todoCount: activeCount(todoItems)
         });
     }
 
-    function markItemDone(itemIndex: number) {
-        var todoItems = state.items;
-        var todo = todoItems[itemIndex];
+    function markItemDone(itemIndex: number): void {
+        const todoItems = state.items,
+              todo = todoItems[itemIndex];
+
         todo.done = !todo.done;
 
-        //update state
         setState({
             items: todoItems,
             todoCount: activeCount(todoItems)
@@ -85,8 +86,8 @@ const TodoApp: React.FC = () => {
 
     const TodoListItem: React.FC<{ item: Item, index: number}> = ({item, index}) => {
 
-    	const todoClass = item.done ? "done" : "undone";
-        const todoClassRow = item.done ? "completed" : "active";
+    	const todoClass: string = item.done ? "done" : "undone";
+        const todoClassRow: string = item.done ? "completed" : "active";
 
     	return (
             <li title={todoClassRow} className="list-group-item">
@@ -104,34 +105,31 @@ const TodoApp: React.FC = () => {
     	const itemsList: ReactNode = items.map((item: Item, index: number) => (
             <TodoListItem key={index} item={item} index={index} />
          ));
-        
-    	return (
-    		<ul className="list-group">{itemsList}</ul>
-    	)
+
+    	return <ul className="list-group">{itemsList}</ul>
     }
 
-    function onAddClick(event: React.FormEvent) {
-
+    function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
 
         var newItemValue = inputRef.current!.value;
-        //console.log(newItemValue, 'new item');
-
-        if(newItemValue) {
-            addItem(newItemValue);
-        }
+        if(newItemValue) addItem( newItemValue );
 
         inputRef.current!.value = ''
-    
     }
 
+    const TodoForm: React.FC = () => ( 
+        <form onSubmit={handleSubmit}>
+            <input type="text" ref={inputRef} className="form-control" placeholder="add a new todo item..."/>
+            <button type="submit" className="btn btn-default">Add</button>
+        </form>
+    );
 
     return (
         <div>
             <div id="main">
             <h1>My TODO List - {state.todoCount} Items</h1>
-            <input type="text" ref={inputRef} className="form-control" placeholder="add a new todo item..."/>
-            <button className="btn btn-default" onClick={onAddClick} >Add</button>
+            <TodoForm />
             <TodoList />
           </div>
 	    </div>
