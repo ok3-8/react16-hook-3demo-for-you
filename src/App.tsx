@@ -4,7 +4,7 @@ import { HashRouter, Redirect, Route, Switch, Link } from 'react-router-dom';
 import "./App.less"
 
 import TodoApp from './todolist';
-import Login from './demo2-';
+import Gobang from './gobang';
 
 const App: React.FC = () => {
     return (
@@ -16,7 +16,7 @@ const App: React.FC = () => {
 	 			</header>
 		        <Switch>
 		            <Route exact path="/todolist" component={ TodoApp } />
-		            <Route exact path="/login" component={ Login } />
+		            <Route exact path="/gobang" component={ Gobang } />
 		        </Switch> 
 	        </HashRouter>
 	        <footer>

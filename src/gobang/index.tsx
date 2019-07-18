@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Login = () => {
+const Gobang = () => {
 
     return (
         <div>
@@ -10,4 +10,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Gobang;
