@@ -1,4 +1,4 @@
-import React, { ReactNode, useState }  from 'react';
+import React, { ReactNode, useState, ReactElement }  from 'react';
 import numberFormat from './format';
 
 import './style.less';
@@ -14,11 +14,11 @@ const Input: React.FC = () => {
     const inputRef = React.createRef<HTMLInputElement>();
 
     const [state, setState] = useState<State>({
-        value: "0"
+        value: "123456"
     });
    
     // "5,0.[000]" | "12" | "0.[000]" | "0,0.[000]"
-    const format = "12";
+    const format = "8,0.[000]";
     
 
     let isAllowInput: boolean = false;
@@ -37,9 +37,20 @@ const Input: React.FC = () => {
 
         // console.log(numberFormat.formatInfo("5,0.[000]"));
 
+
+        let input = e.currentTarget;
+
+        const cops = numberFormat.getCursortPosition(input);
+        
+        console.log("cops:", cops);
+
         isAllowInput && setState({
            value: inputValue
         });
+        setTimeout(()=>{
+            numberFormat.setCaretPosition(input, cops);
+        }, 0)
+        
 
     }
     function handleKeydown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -79,14 +90,22 @@ const Input: React.FC = () => {
     }
 
     function handleButtonClick() {
-        setState({
-            value: Math.random() * 10 + ''
-         });
+        // setState({
+        //     value: Math.random() * 10 + ''
+        //  });
+
+        // numberFormat.setCaretPosition(inputRef, 3);
+    }
+
+    function handelClick(e: React.MouseEvent<HTMLElement>){
+        // numberFormat.getCursortPosition(inputRef);
+        //console.log(e.currentTarget);
+        //numberFormat.setCaretPosition(e.currentTarget, 3);
     }
 
     return (
         <div className="input">
-            <input ref={inputRef} value={state.value} onChange={handelChange} onKeyDown={handleKeydown} onInput={handelInput} />
+            <input ref={inputRef} value={state.value} onChange={handelChange} onKeyDown={handleKeydown} onClick={handelClick} onInput={handelInput} />
             <button onClick={handleButtonClick}>click to change input value!</button>
         </div>
     )

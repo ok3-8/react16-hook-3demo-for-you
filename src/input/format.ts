@@ -1,3 +1,4 @@
+import { ReactNode, ReactElement } from 'react';
 
 // cleave.js
 // numeral.js accounting.js
@@ -111,7 +112,7 @@ function pipe({value, keyCode, format}: Pipe): rePipe {
     return {
       value,
       isAllow: false
-    } 
+    }
   };
 
   // 获取format长度限制， 包括正整数和小数点的时候
@@ -354,9 +355,46 @@ const formatToNumber = (value: string): string => {
 }
 
 
+// 获取光标位置
+function getCursortPosition(input: any) {
+    var CaretPos = 0;   
+    // IE Support
+    // if (document.selection) {
+    //     input.focus();
+    //     var Sel = document.selection.createRange();
+    //     Sel.moveStart ('character', -input.value.length);
+    //     CaretPos = Sel.text.length;
+    // }
+    // Firefox support
+    if (input.selectionStart || input.selectionStart == '0')
+        CaretPos = input.selectionStart;
+
+    console.log("CaretPos:", CaretPos);    
+    return (CaretPos);
+}
+
+// 设置光标位置
+function setCaretPosition(input: any, pos: number){
+    if(input.setSelectionRange)
+    {
+        input.focus();
+        input.setSelectionRange(pos, pos);
+    }
+    else if (input.createTextRange) {
+        var range = input.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', pos);
+        range.moveStart('character', pos);
+        range.select();
+    }
+}
+
+
 export default {
   pipe,
-  formatToNumber
+  formatToNumber,
+  getCursortPosition,
+  setCaretPosition
 };
 
 // load a locale
