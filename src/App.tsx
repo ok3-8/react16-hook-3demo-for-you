@@ -5,6 +5,7 @@ import "./App.less"
 
 import TodoApp from './todolist';
 import Gobang from './gobang';
+import Input from './input';
 
 const App: React.FC = () => {
     return (
@@ -12,11 +13,13 @@ const App: React.FC = () => {
 	        <HashRouter> 			
 	            <header>
 					<Link to="/todolist">todolist</Link>
-					<Link to="/login">login</Link>
+					<Link to="/gobang">gobang</Link>
+					<Link to="/input">input</Link>
 	 			</header>
 		        <Switch>
 		            <Route exact path="/todolist" component={ TodoApp } />
 		            <Route exact path="/gobang" component={ Gobang } />
+		            <Route exact path="/input" component={ Input } />
 		        </Switch> 
 	        </HashRouter>
 	        <footer>
