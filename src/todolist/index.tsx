@@ -34,7 +34,6 @@ const TodoApp: React.FC = () => {
 	    submissionStatus: '',
 	    error: '',
 	    isLoading: false
-
 	});
 
 	function activeCount(items: Item[]): number {

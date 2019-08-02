@@ -10,12 +10,6 @@ const Pixel = (props: Props) => {
 
 	const { onClick, color, size } = props;
 
-	const pixelStyle = {
-        'backgroundColor': `rgb(${color})`, // this.color is "color" in "props"
-        'width': size,
-        'height': size
-	}
-
 	function onPixelClick(){
 		onClick && onClick(color);
 	}

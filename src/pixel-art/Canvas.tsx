@@ -5,22 +5,20 @@ import Pixel from './Pixel';
 type Props = {
 	pixelData: any[]
     colors: any
-    pixelSize:  string, 
-    background:  string
+    pixelSize:  string
+	background:  string
+	colorChange: (color: string, newColor: string) => void
 }
 
 const Canvas = (props: Props) => {
 
 	const { pixelData, colors, pixelSize, background } = props;
 
+	console.log(colors);
+
 	function onPixelClick(color: any) {
 		let newColor = getRandomColor();
-		console.log(color);
-        for(let c in colors) {
-            if (colors[c] === color) {
-                colors[c] = newColor;
-            }
-        }
+		props.colorChange && props.colorChange(color, newColor);
     }
 
     function getRandomColor() {
