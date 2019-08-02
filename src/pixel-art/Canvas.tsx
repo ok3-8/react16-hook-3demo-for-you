@@ -7,18 +7,16 @@ type Props = {
     colors: any
     pixelSize:  string
 	background:  string
-	colorChange: (color: string, newColor: string) => void
+	colorChange: (newColor: string, col: string) => void
 }
 
 const Canvas = (props: Props) => {
 
 	const { pixelData, colors, pixelSize, background } = props;
 
-	console.log(colors);
-
-	function onPixelClick(color: any) {
+	function onPixelClick(col: string) {
 		let newColor = getRandomColor();
-		props.colorChange && props.colorChange(color, newColor);
+		props.colorChange && props.colorChange(newColor, col);
     }
 
     function getRandomColor() {
@@ -36,7 +34,7 @@ const Canvas = (props: Props) => {
 					<div key={rowIndex} style={{height: pixelSize}}>
 					   {
 					   		row.map((col: string, colIndex: number) => (
-					   			<Pixel key={colIndex} color={colors[col]} size={pixelSize} onClick={onPixelClick} />
+					   			<Pixel key={colIndex} col={col} color={colors[col]} size={pixelSize} onClick={onPixelClick} />
 					   		))
 					   }
 		        	</div>

@@ -3,15 +3,16 @@ import React from 'react';
 type Props = {
 	color: string
 	size: string
-	onClick: (color: string) => void
+	col: string
+	onClick: (col: string) => void
 }
 
 const Pixel = (props: Props) => {
 
-	const { onClick, color, size } = props;
+	const { onClick, color, size, col } = props;
 
 	function onPixelClick(){
-		onClick && onClick(color);
+		onClick && onClick(col);
 	}
 
 	return (

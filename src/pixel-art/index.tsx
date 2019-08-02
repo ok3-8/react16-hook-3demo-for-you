@@ -54,12 +54,8 @@ const PixelArt = () => {
 	    colors
 	});
 
-    function handleChange(color: string, newColor: string) {
-        for(let c in colors) {
-            if (colors[c] === color) {
-                colors[c] = newColor;
-            }
-        }
+    function handleChange(newColor: string, col: string) {
+        colors[col] = newColor;
         setState({colors})
     }
 
