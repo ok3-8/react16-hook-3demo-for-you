@@ -14,15 +14,31 @@ code {
 
 header {
   text-align: center;
-  margin-top: 3em;
+  background-color: #282c34;
+  padding: .75em 0;
   font-family: "Space Mono",Monaco,Menlo,Consolas,monospace;
   a {
-    color: #4e504d;
+    color: #ccc;
     line-height: 1.6rem;
     font-size: 2rem;
     padding: 0 .25em;
     &:hover {
-      color: #4e504d;
+      color: #fff;
     }
+  }
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 6rem;
+  pointer-events: none;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

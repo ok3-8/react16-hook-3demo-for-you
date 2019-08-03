@@ -114,9 +114,6 @@ class Gobang extends Component<{}, IState> {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
         { this.renderBoard() }
         { this.renderStatus() }
       </div>
